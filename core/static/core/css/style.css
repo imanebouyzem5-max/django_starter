@@ -1,0 +1,10 @@
+body{font-family:Arial,sans-serif;background:#f4f5f7;margin:0;padding:40px;}
+.container{max-width:520px;margin:0 auto;background:#fff;border-radius:12px;padding:24px;box-shadow:0 4px 16px rgba(0,0,0,.08);}
+h1{color:#2a2b38;}
+form{display:flex;gap:8px;margin-bottom:20px;}
+input[type=text]{flex:1;padding:10px;border:1px solid #ddd;border-radius:8px;}
+button{padding:10px 16px;border:none;border-radius:8px;background:#f5a623;color:#fff;cursor:pointer;}
+.task-list{list-style:none;padding:0;}
+.task-list li{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid #eee;}
+.task-list li.done span{text-decoration:line-through;color:#999;}
+.msg{background:#eaf7ea;padding:8px 12px;border-radius:8px;color:#2d7a2d;}

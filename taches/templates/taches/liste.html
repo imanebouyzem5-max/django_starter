@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>Mes tâches</title>
+<style>
+  body { font-family: sans-serif; max-width: 500px; margin: 40px auto; }
+  form { display: flex; gap: 8px; margin-bottom: 20px; }
+  input[type=text] { flex: 1; padding: 8px; }
+  li { display: flex; justify-content: space-between; padding: 6px 0; }
+  .terminee { text-decoration: line-through; color: gray; }
+</style>
+</head>
+<body>
+  <h1>Mes tâches</h1>
+  <form method="post">
+    {% csrf_token %}
+    <input type="text" name="titre" placeholder="Nouvelle tâche" required>
+    <button type="submit">Ajouter</button>
+  </form>
+  <ul>
+    {% for tache in taches %}
+      <li class="{% if tache.terminee %}terminee{% endif %}">
+        {{ tache.titre }}
+        <span>
+          {% if not tache.terminee %}
+            <a href="{% url 'terminer_tache' tache.id %}">✓</a>
+          {% endif %}
+          <a href="{% url 'supprimer_tache' tache.id %}">✗</a>
+        </span>
+      </li>
+    {% empty %}
+      <li>Aucune tâche.</li>
+    {% endfor %}
+  </ul>
+</body>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Mes Taches</title>
+  <link rel="stylesheet" href="/static/core/css/style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Mes Taches</h1>
+
+    {% if messages %}
+      {% for message in messages %}<p class="msg">{{ message }}</p>{% endfor %}
+    {% endif %}
+
+    <form method="post">
+      {% csrf_token %}
+      <input type="text" name="title" placeholder="Nouvelle tache..." required>
+      <button type="submit">Ajouter</button>
+    </form>
+
+    <ul class="task-list">
+      {% for task in tasks %}
+        <li class="{% if task.is_done %}done{% endif %}">
+          <span>{{ task.title }}</span>
+          <form method="post" action="{% url 'task_toggle' task.pk %}">
+            {% csrf_token %}
+            <button type="submit">{% if task.is_done %}Annuler{% else %}Terminer{% endif %}</button>
+          </form>
+        </li>
+      {% empty %}
+        <li>Aucune tache pour le moment.</li>
+      {% endfor %}
+    </ul>
+  </div>
+</body>
+</html>
